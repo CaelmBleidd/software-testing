@@ -2,10 +2,10 @@
   <div class="list row">
     <div class="col-md-8">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Search by title" @keyup.enter="searchTitle"
+        <input type="text" class="form-control" placeholder="Search by title" @keyup.enter="searchTitle" id="searchInput"
                v-model="title"/>
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button"
+          <button class="btn btn-outline-secondary" type="button" id="searchButton"
                   @click="searchTitle"
           >
             Search
@@ -15,8 +15,9 @@
     </div>
     <div class="col-md-6">
       <h4>Films List</h4>
-      <ul class="list-group">
+      <ul class="list-group" id="filmsList">
         <li class="list-group-item"
+            id="filmItem"
             :class="{ active: index === currentIndex }"
             v-for="(film, index) in films"
             :key="index"
@@ -48,6 +49,7 @@
 
         <a class="badge badge-warning"
            :href="'/films/' + currentFilm.id"
+           id="editButton"
         >
           Edit
         </a>

@@ -14,12 +14,12 @@
                v-model="currentFilm.description"
         />
       </div>
-      <dib class="form-group">
+      <div class="form-group">
         <label for="directors">Directors</label>
         <input type="text" class="form-control" id="directors"
                v-model="currentFilm.directors"
         />
-      </dib>
+      </div>
 
       <div class="form-group">
         <label><strong>Status:</strong></label>
@@ -39,13 +39,13 @@
       Publish
     </button>
 
-    <button class="badge badge-danger mr-2"
+    <button class="badge badge-danger mr-2" id="deleteButton"
             @click="deleteFilm"
     >
       Delete
     </button>
 
-    <button type="submit" class="badge badge-success"
+    <button type="submit" class="badge badge-success" id="updateFilm"
             @click="updateFilm"
     >
       Update
@@ -83,7 +83,7 @@ export default {
     },
 
     updatePublished(status) {
-      var data = {
+      const data = {
         id: this.currentFilm.id,
         title: this.currentFilm.title,
         description: this.currentFilm.description,
@@ -126,7 +126,7 @@ export default {
   mounted() {
     this.message = '';
     this.getFilm(this.$route.params.id);
-  }
+  },
 };
 </script>
 

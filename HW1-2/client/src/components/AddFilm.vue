@@ -35,12 +35,12 @@
         />
       </div>
 
-      <button @click="saveFilm" class="btn btn-success">Submit</button>
+      <button @click="saveFilm" class="btn btn-success" id="submitButton">Submit</button>
     </div>
 
     <div v-else>
       <h4>You submitted successfully!</h4>
-      <button class="btn btn-success" @click="newFilm">Add</button>
+      <button class="btn btn-success" @click="newFilm" id="newFilmButton">Add</button>
     </div>
   </div>
 </template>
