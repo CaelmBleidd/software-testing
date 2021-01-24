@@ -11,9 +11,18 @@ jobs:
       - checkout
       - run: cd ./client && npm install --save
       - run: npm --prefix ./client run test:unit
+  run_spring_test:
+    docker:
+      - image: circleci/openjdk:11.0.3-jdk-stretch
+    steps:
+      - checkout
+      - run: cd ./server-spring && ./gradlew clean test
+
+
 workflows:
   version: 2
   build_test:
     jobs:
       - run_client_test
+      - run_spring_test
     
