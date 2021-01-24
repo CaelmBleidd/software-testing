@@ -1,8 +1,8 @@
-import Film from '../src/components/Film.vue'
+import Film from '../../src/components/Film.vue'
 import {afterEach, describe, it} from "@jest/globals";
 import {shallowMount} from "@vue/test-utils";
 import flushPromises from 'flush-promises'
-import FilmDataService from "../src/services/FilmDataService";
+import FilmDataService from "../../src/services/FilmDataService";
 
 const sinon = require('sinon');
 

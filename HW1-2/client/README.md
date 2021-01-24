@@ -28,7 +28,7 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-To run cypress tests:
+To run e2e.cypress tests:
 ```
-$(npm bin)/cypress open
+$(npm bin)/e2e.cypress open
 ```

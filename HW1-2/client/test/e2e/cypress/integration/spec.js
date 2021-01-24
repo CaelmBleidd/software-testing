@@ -18,7 +18,6 @@ describe('add film page', () => {
     })
 
     it('Add film', () => {
-
         cy.visit("http://localhost:8081/add")
         cy.get("#title").type("%%%Test film").should('have.value', "%%%Test film")
         cy.get("#description").type("Test film description").should('have.value', "Test film description")
