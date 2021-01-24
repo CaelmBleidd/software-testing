@@ -11,4 +11,9 @@ jobs:
       - checkout
       - run: cd ./client && npm install --save
       - run: npm --prefix ./client run test:unit
+workflows:
+  version: 2
+  build_test:
+    jobs:
+      - run_client_test
     
