@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:unit": "jest --watchAll --testPathPattern=test/unit",
+    "test:unit": "jest --watchAll --testPathPattern=test/unit --forceExit",
     "test:e2e:cypress:open": "$(npm bin)/cypress open",
     "test:e2e:cypress": "npx cypress run",
     "test:e2e:playwright": "vue-cli-service test:e2e 'test/e2e/playwright/spec.js'"
