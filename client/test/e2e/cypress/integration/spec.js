@@ -1,4 +1,11 @@
 describe('add film page', () => {
+    beforeEach(() => {
+        cy.visit("http://localhost:8081/login")
+        cy.get("#username").type("test")
+        cy.get("#password").type("password")
+        cy.get("#loginFormButton").click()
+    })
+
     it('All elements exist and visible', () => {
         cy.visit("http://localhost:8081/add")
         cy.contains("Title")
@@ -52,7 +59,12 @@ describe('add film page', () => {
 })
 
 describe('Navigation', () => {
-
+    beforeEach(() => {
+        cy.visit("http://localhost:8081/login")
+        cy.get("#username").type("test")
+        cy.get("#password").type("password")
+        cy.get("#loginFormButton").click()
+    })
 
     it('Navigation test', () => {
         cy.visit("http://localhost:8081/")
@@ -81,6 +93,13 @@ describe('Navigation', () => {
 })
 
 describe('FilmsList', () => {
+    beforeEach(() => {
+        cy.visit("http://localhost:8081/login")
+        cy.get("#username").type("test")
+        cy.get("#password").type("password")
+        cy.get("#loginFormButton").click()
+    })
+
     it('Edit film', () => {
         cy.visit("http://localhost:8081/films")
 
@@ -110,5 +129,37 @@ describe('FilmsList', () => {
         cy.get("#filmsList").each((item, _) => {
             cy.wrap(item).should('contain.text', 'the')
         })
+    })
+})
+
+describe('Authorization tests', () => {
+    it('register', () => {
+        cy.visit("http://localhost:8081/signup")
+        cy.get("#signupButton").click()
+        cy.get("#username").type("testusertname")
+        cy.get("#email").type("testuseremail@email.ru")
+        cy.get("#password").type("password")
+
+        cy.intercept('POST', '/api/users/signup', {
+            statusCode: 200,
+            body: {
+                username: "username",
+                email: "email@email.ru",
+                password: "password"
+            }
+        })
+
+        cy.get("#signupFormButton").click()
+        cy.get("#logoutButton").should('exist')
+    })
+
+    it('register without required parameters', () => {
+        cy.visit("http://localhost:8081/signup")
+        cy.get("#signupButton").click()
+
+        cy.get("#signupFormButton").click()
+        cy.contains("The username field is required")
+        cy.contains("The email field must be a valid email")
+        cy.contains("The password field is required")
     })
 })

@@ -1,5 +1,5 @@
 import Film from '../../src/components/Film.vue'
-import {afterEach, describe, it} from "@jest/globals";
+import {afterAll, afterEach, describe, it} from "@jest/globals";
 import {shallowMount} from "@vue/test-utils";
 import flushPromises from 'flush-promises'
 import FilmDataService from "../../src/services/FilmDataService";
@@ -92,5 +92,7 @@ describe('Film.vue', () => {
 
         expect(wrapper.vm.message).toBe("The film was updated successfully!")
     })
+
+    afterAll(() => setTimeout(() => process.exit(), 1000))
 })
 

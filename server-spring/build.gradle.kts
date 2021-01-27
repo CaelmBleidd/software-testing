@@ -29,6 +29,9 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.mockito:mockito-core:3.3.3")
     implementation("com.codeborne:selenide:5.18.0")
+    implementation("org.springframework.security:spring-security-core:5.4.2")
+    implementation("io.projectreactor:reactor-core:3.4.2")
+
 }
 
 tasks.withType<KotlinCompile> {

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class FilmService(private val filmRepository: FilmRepository) {
-    public var randomService = RandomService()
+    var randomService = RandomService()
 
     fun findById(id: Long): Film = filmRepository.findById(id).orElseThrow { NoSuchElementException("Task $id not found") }
 

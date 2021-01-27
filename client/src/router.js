@@ -1,9 +1,10 @@
-import Vue from "vue";
-import Router from "vue-router";
+import Vue from 'vue';
+import Router from 'vue-router';
+import Register from './views/Register.vue';
 
 Vue.use(Router);
 
-export default new Router({
+export const router = new Router({
     mode: "history",
     routes: [
         {
@@ -21,7 +22,30 @@ export default new Router({
             path: "/add",
             name: "add",
             component: () => import("./components/AddFilm")
+        },
+        {
+            path: "/login",
+            name: "login",
+            component: () => import("./views/Login")
+        },
+        {
+            path: '/register',
+            component: Register
         }
+
     ]
 });
+
+router.beforeEach((to, from, next) => {
+    const publicPages = ['/login', '/register', '/', '/films'];
+    const authRequired = !publicPages.includes(to.path);
+    const loggedIn = localStorage.getItem('user');
+
+    if (authRequired && !loggedIn) {
+        next('/login');
+    } else {
+        next();
+    }
+});
+
 
