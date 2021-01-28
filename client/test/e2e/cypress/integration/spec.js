@@ -1,10 +1,18 @@
+import "cypress-localstorage-commands";
+
+Cypress.Commands.add('login', () => {
+    cy.setLocalStorage('testToken', "asldakldmslda");
+});
+
 describe('add film page', () => {
+    before(() => {
+        cy.login();
+        cy.saveLocalStorage();
+    });
+
     beforeEach(() => {
-        cy.visit("http://localhost:8081/login")
-        cy.get("#username").type("test")
-        cy.get("#password").type("password")
-        cy.get("#loginFormButton").click()
-    })
+        cy.restoreLocalStorage();
+    });
 
     it('All elements exist and visible', () => {
         cy.visit("http://localhost:8081/add")
@@ -59,12 +67,14 @@ describe('add film page', () => {
 })
 
 describe('Navigation', () => {
+    before(() => {
+        cy.login();
+        cy.saveLocalStorage();
+    });
+
     beforeEach(() => {
-        cy.visit("http://localhost:8081/login")
-        cy.get("#username").type("test")
-        cy.get("#password").type("password")
-        cy.get("#loginFormButton").click()
-    })
+        cy.restoreLocalStorage();
+    });
 
     it('Navigation test', () => {
         cy.visit("http://localhost:8081/")
@@ -93,12 +103,15 @@ describe('Navigation', () => {
 })
 
 describe('FilmsList', () => {
+    before(() => {
+        cy.login();
+        cy.saveLocalStorage();
+    });
+
     beforeEach(() => {
-        cy.visit("http://localhost:8081/login")
-        cy.get("#username").type("test")
-        cy.get("#password").type("password")
-        cy.get("#loginFormButton").click()
-    })
+        cy.restoreLocalStorage();
+    });
+
 
     it('Edit film', () => {
         cy.visit("http://localhost:8081/films")
@@ -161,5 +174,17 @@ describe('Authorization tests', () => {
         cy.contains("The username field is required")
         cy.contains("The email field must be a valid email")
         cy.contains("The password field is required")
+    })
+
+    it('authorization', () => {
+        cy.visit("http://localhost:8081/add")
+        cy.location('pathname').should('include', "login")
+
+        cy.get("#username").type("test")
+        cy.get("#password").type("testtest")
+        cy.get("#loginFormButton").click()
+
+        cy.visit("http://localhost:8081/add")
+        cy.location('pathname').should('include', "/add")
     })
 })
